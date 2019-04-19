@@ -9,7 +9,7 @@ default:
 	$(JC) $(JFLAGS) $(SOURCES)
 
 run:
-	$(J) bin/BarrierTest
+	cd src/
+	$(J) BarrierS/BarrierTest
 clean:
-	cp $(CLASSES) bin/BarrierS/
 	rm $(CLASSES)
