@@ -9,6 +9,6 @@ default:
 	$(JC) $(JFLAGS) $(SOURCES)
 
 run:
-	$(J) BarrierS/BarrierTest
+	$(J) BarrierS/BarrierTest 5 5
 clean:
 	rm $(CLASSES)
