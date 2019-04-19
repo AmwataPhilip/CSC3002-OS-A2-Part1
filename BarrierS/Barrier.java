@@ -5,7 +5,7 @@ import java.util.concurrent.Semaphore;
 public class Barrier {
 
 	private int limit;
-	private static int count = 1;
+	private static int count = 0;
 	private final Semaphore barrier;
 
 	Barrier(int limit) {
@@ -13,25 +13,17 @@ public class Barrier {
 		this.limit = limit; // Set limit
 	}
 
-	public synchronized void b_wait() throws InterruptedException {
-		Semaphore sync = new Semaphore(1);
-		while (count < limit) {
-			synchronized (sync) {
-				count += 1;
-				System.out.println(count);
+	public void b_wait() throws InterruptedException {
+		count += 1;
+		if (count == limit) {
+			synchronized (barrier) {
+				barrier.notifyAll();
 			}
-			barrier.acquire();
+
 		}
 		synchronized (barrier) {
-			barrier.notifyAll();
+			barrier.wait();
+			barrier.notify();
 		}
-
-		// if (count == limit - 1) {
-		// barrier.release(limit * 2);
-		// } else {
-		// count += 1;
-		// System.out.println(barrier.availablePermits());
-		// barrier.acquire();
-		// }
 	}
 }
