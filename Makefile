@@ -1,10 +1,20 @@
+JFLAGS = -g
 JC = javac
-JAVA = java
-TARGETS = bin/Barrier.class
-SOURCES = src/Barrier.java
 
-$(TARGETS): $(SOURCES)
-	$(JAVAC) $(SOURCES)
+.SUFFIXES: .java .class
 
-run:
-	$(JAVA) $(TARGETS)
+.java.class:
+	$(JC) $(JFLAGS) 
+
+CLASSES = \
+		/src/Barrier.java \
+		/src/BarrierTest.java \
+		/src/BThread.java
+
+default: classes
+
+classes: $(CLASSES: .java = .class)
+
+clean:
+	cp *.class bin/
+	rm *.class
