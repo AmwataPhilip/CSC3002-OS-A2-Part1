@@ -1,16 +1,19 @@
 package BarrierS;
+
 import java.util.concurrent.Semaphore;
 
 public class Barrier {
-	
+
 	// add missing variables
-	
-	Barrier(int n) {
-		// complete this constructor
+	private int limit;
+	private final Semaphore semaphore;
+
+	Barrier(int limit) {
+		this.semaphore = new Semaphore(limit); // Create Semaphore and set limit
 	}
-	
-	public void b_wait() throws InterruptedException{
-		// this is the only additional method you will need to complete
+
+	public void b_wait() throws InterruptedException {
+		semaphore.acquire();
 	}
 
 }
